@@ -3,11 +3,11 @@
 class Recipe
 {
     private $title;
-    public $ingredients = array();
-    public $instructions = array();
-    public $yield;
-    public $tag = array();
-    public $source = "Alena Holligan";
+    private $ingredients = array();
+    private $instructions = array();
+    private $yield;
+    private $tag = array();
+    private $source = "Alena Holligan";
 	
 		private $measurements = array(
 			"tsp",
@@ -31,7 +31,7 @@ class Recipe
 		return $this->title;
 	}
 	
-	public function addIngredient($item, $amont=null, $measure=null)
+	public function addIngredient($item, $amount=null, $measure=null)
 	{
 		if ($amount != null && !is_float($amount) && !is_int($amount)) {
 			exit("The amount must be a float: " . gettype($amount) . " $amount given");
@@ -51,9 +51,46 @@ class Recipe
 	{
 		return $this->ingredients;
 	}
+	
+	public function addInstruction($string)
+	{
+		$this->instruction[] = $string;
+	}
+	
+	public function getInstructions()
+	{
+		return $this->instructions;
+	}
+	
+	public function addTag($tag)
+	{
+		$this->tags[] = strtolower($tag);
+	}
+	
+	public function getTags() 
+	{
+		return $this->tags;
+	}
+	
+	public function setYield($yield)
+	{
+		$this->yeild = $yield;
+	}
+	
+	public function getYield()
+	{
+		return $this->yield;
+	}
+	
+	public function setSource($source)
+	{
+		$this->source = ucwords($source);
+	}
+	
+	publice function getSource()
+	{
+		return $this->source;
+	}
+	
     
-    public function displayRecipe()
-    {
-        return $this->title . " by " . $this->source;
-    }
 }
