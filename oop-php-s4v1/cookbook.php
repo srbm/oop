@@ -1,7 +1,6 @@
 <?php
 include "classes/recipes.php";
 include "classes/render.php";
-include "inc/recipes.php";
 include "classes/recipecollection.php";
 
 	
@@ -9,7 +8,7 @@ $cookbok = new RecipeCollection("Treehouse Recipes");
 $cookbook->addRecipe($lemon_chicken);
 $cookbook->addRecipe($granola_muffins);
 $cookbook->addRecipe($belgian_waffles);
-$pepper_casserole);
+$cookbook->addRecipe($pepper_casserole);
 $cookbook->addRecipe($lasagna);
 $cookbook->addRecipe($dried_mushroom_ragout);
 $cookbook->addRecipe($rabbit_catalan);
@@ -27,11 +26,20 @@ $cookbook->addRecipe($scones);
 
 $breakfast = new RecipeCollection("Favorite Breakfasts");
 foreach ($cookbook->filterByTag("breakfast") as $recipe) {
-	$breakfast-.addRecipe($recipe);
+	$breakfast->addRecipe($recipe);
 }
 
-echo Render::listShopping($breakfast->getCombinedIngredients());
+$week1 = new RecipeCollection("Meal Plan: Week 1");
+$week1->addRecipe($cookbook->filterById(2));
+$week1->addRecipe($cookbook->filterById(3));
+$week1->addRecipe($cookbook->filterById(6));
+$week1->addRecipe($cookbook->filterById(16));
 
-echo Render::listRecipes($cookbook->getRecipeTitles);
+//echo Render::listRecipes($week1->getRecipeTitles());
 
-echo Render::displayRecipe($belgian_waffles);
+echo "\n\nSHOPPING LIST\n\n";
+echo Render::listShopping($week1->getCombinedIngredients());
+
+//echo Render::listRecipes($cookbook->getRecipeTitles);
+
+//echo Render::displayRecipe($cookbook=>filterById(2));
