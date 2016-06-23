@@ -34,3 +34,51 @@ public function getRecipes()
 {
 	return $this->recipes;
 }
+
+public function getRecipeTitles()
+{
+	$titles = array();
+	foreach ($this->recipes as $recipe) {
+		$titles[] = $recipe->getTitle();
+	}
+	return $titles;
+}
+
+public function filterByTag($tag)
+{
+	$taggedRecipes = array();
+	foreach($this->recipes as $recipe) {
+		if(in_array(strtolower($tag), $recipe->getTags())) {
+			$taggedRecipes[] = $recipe;
+		}
+	}
+	return $taggedRecipes;
+}
+
+public function getCombinedIngredients()
+{
+	$ingredients = array();
+	foreach ($this->recipes as $recipe) {
+		$item = $ing["item"];
+		if (strpos($item, ",")) {
+			$item = strstr($item, ",", true);
+		} 
+		if (in_array($item, "s", $ingredients)) {
+			$item .= "s";
+		} else if (in_array(substr($item, 0, -1), $ingredients)) {
+			$item = substr($item, 0 -1);
+		}
+		foreach ($recipe->getIngredients() as $ing) {
+			$ingredients[$item] = array(
+				$ing["amount"],
+				$ing["measure"]
+			);
+			}
+		}
+		return $ingredients;
+	}
+
+
+
+
+
